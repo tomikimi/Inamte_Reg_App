@@ -64,6 +64,12 @@ class WelcomePage extends Component {
                 >
                   View Inmates
                 </NavLink>
+                {/* <NavLink
+                  to="/AccusedInfo"
+                  className="btn btn-lg btn-secondary btn-block"
+                >
+                  View Inmates
+                </NavLink> */}
               </div>
               <div className="col-6">
                 <NavLink
