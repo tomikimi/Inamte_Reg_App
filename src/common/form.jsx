@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "../common/input";
+import Input2 from "../common/input2";
 import Dropdown from "../common/dropdown";
 
 class Form extends Component {
-  state = { date: {}, errors: {} };
+  state = { data: {}, errors: {} };
   validate = () => {
     const options = { abortEarly: false };
     const result = Joi.validate(this.state.data, this.schema, options);
@@ -36,6 +37,11 @@ class Form extends Component {
     data[input.name] = input.value;
     this.setState({ data, errors });
   };
+  handleChange2 = ({ currentTarget: input }) => {
+    const data = [...this.state.data2];
+    data[input.name] = input.value;
+    this.setState({ data });
+  };
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -60,6 +66,20 @@ class Form extends Component {
       />
     );
   };
+  renderInput2 = (name, placeholder, type = "text") => {
+    const { data2, errors } = this.state;
+    return (
+      <Input2
+        id={name}
+        name={name}
+        type={type}
+        value={data2[name]}
+        placeholder={placeholder}
+        onChange={this.handleChange2}
+        error={errors[name]}
+      />
+    );
+  };
   renderDropDown = (label, name, value, textProperty, valueProperty) => {
     const { data, errors } = this.state;
     return (
@@ -76,7 +96,7 @@ class Form extends Component {
       ></Dropdown>
     );
   };
-  renderButton = (label, spinnerStatus = false) => {
+  renderButton = (label, displayStyle, spinnerStatus = false) => {
     if (spinnerStatus === true) {
       return (
         <div className="form-button-group">
@@ -91,7 +111,7 @@ class Form extends Component {
       );
     } else {
       return (
-        <div className="form-button-group">
+        <div style={{ display: displayStyle }} className="form-button-group">
           <button
             disabled={this.validate()}
             className="btn btn-primary btn-block btn-lg"
