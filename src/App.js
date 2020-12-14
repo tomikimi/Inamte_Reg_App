@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import jwtDecode from "jwt-decode";
 import Login from "./components/login";
@@ -8,8 +8,10 @@ import WelcomePage from "./components/welcomePage";
 import WelcomeRoute from "./common/welcomePageRoute";
 import RegistrationPage from "./components/registrationPage";
 import RegisteredInmates from "./components/registeredInmates";
+import Accused from "./components/accused";
 import "../src/assets/css/style.css";
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./components/notFound";
 
 class App extends Component {
   state = {};
@@ -28,6 +30,12 @@ class App extends Component {
       <div id="appCapsule">
         <ToastContainer></ToastContainer>
         <Switch>
+          <Route path="/AccusedInfo" component={Accused}></Route>
+
+          <Route
+            path="/RegistrationPage/:id"
+            component={RegistrationPage}
+          ></Route>
           <Route
             path="/RegisteredInmates"
             component={RegisteredInmates}
@@ -45,6 +53,8 @@ class App extends Component {
           ></WelcomeRoute>
           <Route path="/LogOut" component={LogOut}></Route>
           <Route path="/" component={Login} exact={true}></Route>
+          <Route path="/NotFound" component={NotFound}></Route>
+          <Redirect to="/NotFound"></Redirect>
         </Switch>
       </div>
     );
