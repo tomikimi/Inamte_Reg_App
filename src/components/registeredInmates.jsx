@@ -69,7 +69,12 @@ class RegisteredInmates extends Component {
           <div className="section-title"></div>
           <div className="transactions">
             {inmateData.map((inmate) => (
-              <a href="app-transaction-detail.html" className="item">
+              <NavLink
+                key={inmate._id}
+                href="app-transaction-detail.html"
+                className="item"
+                to={`/RegistrationPage/${inmate._id}`}
+              >
                 <div className="detail">
                   <img
                     src={`${contentType} ${this.arrayBufferToBase64(
@@ -79,14 +84,14 @@ class RegisteredInmates extends Component {
                     className="image-block imaged w48"
                   />
                   <div>
-                    <strong>{`${inmate.firstName} ${inmate.lastName}`}</strong>
+                    <strong>{`${inmate.complainerName}`}</strong>
                     <p>{inmate.offence}</p>
                   </div>
                 </div>
                 <div className="right">
-                  <div className="price text-danger">{inmate.dateAdmitted}</div>
+                  <div className="price text-danger">{inmate.offenceDate}</div>
                 </div>
-              </a>
+              </NavLink>
             ))}
           </div>
         </div>
