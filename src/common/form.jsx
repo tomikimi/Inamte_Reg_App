@@ -37,11 +37,6 @@ class Form extends Component {
     data[input.name] = input.value;
     this.setState({ data, errors });
   };
-  handleChange2 = ({ currentTarget: input }) => {
-    const data = [...this.state.data2];
-    data[input.name] = input.value;
-    this.setState({ data });
-  };
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -62,20 +57,6 @@ class Form extends Component {
         value={data[name]}
         placeholder={placeholder}
         onChange={this.handleChange}
-        error={errors[name]}
-      />
-    );
-  };
-  renderInput2 = (name, placeholder, type = "text") => {
-    const { data2, errors } = this.state;
-    return (
-      <Input2
-        id={name}
-        name={name}
-        type={type}
-        value={data2[name]}
-        placeholder={placeholder}
-        onChange={this.handleChange2}
         error={errors[name]}
       />
     );
